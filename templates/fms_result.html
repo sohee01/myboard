@@ -1,0 +1,64 @@
+{% extends 'base.html' %} 
+{% block title %}FMS 결과 보기{% endblock %} 
+
+{% block content %}
+<style>
+    .fms-container {
+        width: 95%;
+        margin: 20px auto;
+        font-family: 'Malgun Gothic', sans-serif;
+    }
+    .fms-table {
+        width: 100%;
+        border-collapse: collapse; /* 선을 하나로 합침 */
+        background-color: white;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .fms-table th {
+        background-color: #4A90E2; /* 상단 파란색 바와 맞춤 */
+        color: white;
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+    .fms-table td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    .fms-table tr:nth-child(even) {
+        background-color: #f9f9f9; /* 줄무늬 효과로 가독성 높임 */
+    }
+    .fms-table tr:hover {
+        background-color: #f1f1f1; /* 마우스 올렸을 때 강조 */
+    }
+    h2 {
+        color: #333;
+        border-left: 5px solid #4A90E2;
+        padding-left: 10px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="fms-container">
+    <h2>FMS 통합 결과</h2>
+    <table class="fms-table">
+        <thead>
+            <tr>
+                {% for column in results[0].keys() %}
+                <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in results %}
+            <tr>
+                {% for key, value in row.items() %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
